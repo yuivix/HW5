@@ -1,6 +1,7 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Ryan Avalos / COMP 272 002
+ *   External Source(s) Used: https://www.geeksforgeeks.org/java/priority-queue-in-java/
  *
  *   This java file contains the problem solutions of isSubSet, findKthLargest,
  *   and sort2Arrays methods. You should utilize the Java Collection Framework for
@@ -33,8 +34,19 @@ class ProblemSolutions {
     public boolean isSubset(int list1[], int list2[]) {
 
         // ADD YOU CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
+        Set<Integer> set = new HashSet<>();
 
-        return false;
+        // Adds set1 elements to hash
+        for (int i = 0; i < list1.length; i++) {
+            set.add(list1[i]);
+        }
+        // Returns false if set does't contain list2 elements 
+        for (int j = 0; j < list2.length; j++) {
+            if (!set.contains(list2[j])) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -54,8 +66,16 @@ class ProblemSolutions {
     public int findKthLargest(int[] array, int k) {
 
         // ADD YOUR CODE HERE
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
 
-        return 0;
+        for (int i = 0; i < array.length; i++) {
+            minHeap.add(array[i]);
+            // Removes smallest element if size is higher than k
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+     }
+        return minHeap.peek();
     }
 
 
@@ -75,8 +95,21 @@ class ProblemSolutions {
     public int[] sort2Arrays(int[] array1, int[] array2) {
 
         // ADD YOU CODE HERE
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
 
-        return null;
+        for (int i = 0; i < array1.length; i++) {
+            pq.add(array1[i]);
+        }
+        for (int j = 0; j < array2.length; j++) {
+            pq.add(array2[j]);
+        }
+        // Set new array length
+        int[] sortArray = new int[array1.length + array2.length];
+        // Polls elements from minHeap in order
+        for (int k = 0; k < sortArray.length; k++) {
+            sortArray[k] = pq.poll();
+        }
+        return sortArray;
     }
 
 }
